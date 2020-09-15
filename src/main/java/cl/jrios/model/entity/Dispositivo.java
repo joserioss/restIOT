@@ -19,7 +19,7 @@ public class Dispositivo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Setter
 	@Getter
-	private Integer id;
+	private Integer idDispositivo;
 	@Setter
 	@Getter
 	private String nombre;
@@ -31,7 +31,7 @@ public class Dispositivo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((idDispositivo == null) ? 0 : idDispositivo.hashCode());
 		return result;
 	}
 
@@ -44,10 +44,10 @@ public class Dispositivo {
 		if (getClass() != obj.getClass())
 			return false;
 		Dispositivo other = (Dispositivo) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (idDispositivo == null) {
+			if (other.idDispositivo != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!idDispositivo.equals(other.idDispositivo))
 			return false;
 		return true;
 	}

@@ -18,7 +18,7 @@ public class Sensor {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Setter
 	@Getter
-	private Integer id;
+	private Integer idSensor;
 	@Setter
 	@Getter
 	private String nombre;
@@ -27,7 +27,7 @@ public class Sensor {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((idSensor == null) ? 0 : idSensor.hashCode());
 		return result;
 	}
 
@@ -40,10 +40,10 @@ public class Sensor {
 		if (getClass() != obj.getClass())
 			return false;
 		Sensor other = (Sensor) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (idSensor == null) {
+			if (other.idSensor != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!idSensor.equals(other.idSensor))
 			return false;
 		return true;
 	}

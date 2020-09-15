@@ -17,58 +17,57 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import cl.jrios.exception.ModeloNotFoundException;
-import cl.jrios.model.dto.DispositivosListaSensoresDto;
-import cl.jrios.model.entity.Dispositivo;
-import cl.jrios.model.service.DispositivoService;
+import cl.jrios.model.entity.Sensor;
+import cl.jrios.model.service.SensorService;
 
 @RestController
-@RequestMapping("/dispositivos")
-public class DispositivoController {
+@RequestMapping("/sensores")
+public class SensorController {
 
 	@Autowired
-	private DispositivoService service;
+	private SensorService service;
 
 	@GetMapping
-	public ResponseEntity<List<Dispositivo>> listar() {
-		List<Dispositivo> lista = service.listar();
-		return new ResponseEntity<List<Dispositivo>>(lista, HttpStatus.OK);
+	public ResponseEntity<List<Sensor>> listar() {
+		List<Sensor> lista = service.listar();
+		return new ResponseEntity<List<Sensor>>(lista, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Dispositivo> listarPorId(@PathVariable("id") Integer id) {
-		Dispositivo obj = service.leerPorId(id);
-		if (obj.getIdDispositivo() == null) {
+	public ResponseEntity<Sensor> listarPorId(@PathVariable("id") Integer id) {
+		Sensor obj = service.leerPorId(id);
+		if (obj.getIdSensor() == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO" + id);
 		}
-		return new ResponseEntity<Dispositivo>(obj, HttpStatus.OK);
+		return new ResponseEntity<Sensor>(obj, HttpStatus.OK);
 	}
 
 //	@PostMapping
-//	public ResponseEntity<Dispositivo> registrar(@RequestBody Dispositivo dispositivo) {
-//		Dispositivo obj =  service.registrar(dispositivo);
-//		return new ResponseEntity<Dispositivo>(obj, HttpStatus.CREATED);
+//	public ResponseEntity<Sensor> registrar(@RequestBody Sensor sensor) {
+//		Sensor obj =  service.registrar(sensor);
+//		return new ResponseEntity<Sensor>(obj, HttpStatus.CREATED);
 //
 //	}
 
 	@PostMapping
-	public ResponseEntity<Dispositivo> registrar(@RequestBody DispositivosListaSensoresDto dispositivoDTO) {
-		Dispositivo obj = service.registrarTransaccional(dispositivoDTO);
+	public ResponseEntity<Sensor> registrar(@RequestBody Sensor sensor) {
+		Sensor obj = service.registrar(sensor);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(obj.getIdDispositivo()).toUri();
+				.buildAndExpand(sensor.getIdSensor()).toUri();
 		return ResponseEntity.created(location).build();
 
 	}
 
 	@PutMapping
-	public ResponseEntity<Dispositivo> modificar(@RequestBody Dispositivo dispositivo) {
-		Dispositivo obj = service.modificar(dispositivo);
-		return new ResponseEntity<Dispositivo>(obj, HttpStatus.OK);
+	public ResponseEntity<Sensor> modificar(@RequestBody Sensor sensor) {
+		Sensor obj = service.modificar(sensor);
+		return new ResponseEntity<Sensor>(obj, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> eliminar(@PathVariable("id") Integer id) {
-		Dispositivo obj = service.leerPorId(id);
-		if (obj.getIdDispositivo() == null) {
+		Sensor obj = service.leerPorId(id);
+		if (obj.getIdSensor() == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO " + id);
 		}
 		service.eliminar(id);
